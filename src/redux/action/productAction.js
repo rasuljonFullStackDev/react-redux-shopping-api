@@ -11,3 +11,9 @@ export const selectedProducts = (product) =>{
         payload:product
     }
 }
+export const selectedAddCard = (product) =>{
+    return {
+        type:ActionTypes.ADD_CARD,
+        payload:product
+    }
+}

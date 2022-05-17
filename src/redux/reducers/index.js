@@ -3,7 +3,6 @@ import { productReducer,selectedProductFirst } from './productReducer';
 
 const reducers = combineReducers({
     allProducts: productReducer,
-    product:selectedProductFirst
-
+    product:selectedProductFirst,
 })
 export default reducers;
