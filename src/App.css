@@ -19,3 +19,8 @@ h1{
     justify-content: space-around;
     align-items: center;
 }
+#cardAddPriceALl{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { selectedProducts,selectedAddCard } from '../redux/action/productAction';
+import { selectedProducts, selectedAddCard } from '../redux/action/productAction';
 import axios from 'axios';
-import { Badge, Card, Col, Row, Skeleton, Typography,Button } from 'antd';
+import { Badge, Card, Col, Row, Skeleton, Typography, Button, Image } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
 const { Text, Title } = Typography;
 const ProductDeteils = () => {
     const [load, setload] = useState(true);
+    const [visible, setVisible] = useState(false);
     const { id } = useParams();
     const dipatch = useDispatch();
     let products = useSelector(state => state.allProducts.addCard);
@@ -17,7 +18,7 @@ const ProductDeteils = () => {
             .catch((err) => {
                 console.log(err);
             })
-        if (id !== "" && res.status===200) {
+        if (id !== "" && res.status === 200) {
             dipatch(selectedProducts(res.data))
             setload(false)
         }
@@ -27,7 +28,7 @@ const ProductDeteils = () => {
     useEffect(() => {
         fetchProductDetil()
     }, [])
-    const addCards = () =>{
+    const addCards = () => {
         dipatch(selectedAddCard(product));
         // products = useSelector(state => state.allProducts.addCard);
         console.log(products);
@@ -42,12 +43,16 @@ const ProductDeteils = () => {
 
                         <Badge.Ribbon text={product.price + "$"}>
 
-                            <Card
-                                hoverable
-                                style={{ margin: " 5px 10px", height: "400px" }}
-                                cover={<img alt="example" src={product.image} />}
-                            >
-                            </Card>
+
+                            <Image
+                                src={product.image}
+                                placeholder={
+                                    <Image
+                                        preview={false}
+                                        src={product.image}
+                                    />
+                                }
+                            />
                         </Badge.Ribbon>
 
 
