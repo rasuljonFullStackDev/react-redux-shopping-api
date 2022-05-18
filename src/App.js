@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from './container/Header';
 import ProductList from './container/ProductList';
 import ProductDeteils from './container/ProductDeteils';
+import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
   return (
     <div>

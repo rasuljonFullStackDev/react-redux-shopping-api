@@ -5,14 +5,12 @@ import { selectedProducts, selectedAddCard } from '../redux/action/productAction
 import axios from 'axios';
 import { Badge, Card, Col, Row, Skeleton, Typography, Button, Image } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
-
+import { toast, ToastContainer } from 'react-toastify';
 const { Text, Title } = Typography;
 const ProductDeteils = () => {
     const [load, setload] = useState(true);
-    const [visible, setVisible] = useState(false);
     const { id } = useParams();
     const dipatch = useDispatch();
-    let products = useSelector(state => state.allProducts.addCard);
     const fetchProductDetil = async () => {
         const res = await axios.get(`https://fakestoreapi.com/products/${id}`)
             .catch((err) => {
@@ -30,20 +28,16 @@ const ProductDeteils = () => {
     }, [])
     const addCards = () => {
         dipatch(selectedAddCard(product));
-        // products = useSelector(state => state.allProducts.addCard);
-        console.log(products);
+       toast.success('Card Add')
     }
     const product = useSelector(state => state.product);
     return (
         <div>
+            <ToastContainer/>
             <Skeleton active={load} loading={load} shape="Space" avatar>
-
                 <Row>
                     <Col lg={6}>
-
                         <Badge.Ribbon text={product.price + "$"}>
-
-
                             <Image
                                 src={product.image}
                                 placeholder={
@@ -54,9 +48,6 @@ const ProductDeteils = () => {
                                 }
                             />
                         </Badge.Ribbon>
-
-
-
                     </Col>
                     <Col lg={12}>
                         <Card
@@ -68,7 +59,6 @@ const ProductDeteils = () => {
                             <Text>{product.description}</Text>
                             <br />
                             <Button size='large' type='primary' onClick={addCards}><ShoppingCartOutlined /> Add card</Button>
-
                         </Card>
                     </Col>
                 </Row>
